@@ -38,7 +38,7 @@ function App() {
 
   return (
     <>
-      <HeadButtons product={product} />
+      <HeadButtons product={product} setProduct={setProduct} />
       <div className="row-box">
         <ImgContainer selectedImg={selectedImg} setSelectedImg={setSelectedImg} openSlider={openSlider} />
         <RightContainer productCount={count} setCount={setCount} addToCard={addToCard} />
@@ -74,14 +74,16 @@ function App() {
   );
 }
 
-function Basket({ product }) {
+function Basket({ product, setProduct }) {
   const [modal, setModal] = useState(false);
 
   function handleClickBasket() {
     setModal(!modal);
   }
 
-  function handleRemove() {}
+  function handleRemove() {
+    setProduct({});
+  }
 
   function handleCheckout() {}
 
@@ -139,11 +141,11 @@ function Profile() {
   return <button className="profile"></button>;
 }
 
-function HeadButtons({ product }) {
+function HeadButtons({ product, setProduct }) {
   return (
     <>
       <div className="profile-container">
-        <Basket product={product} />
+        <Basket product={product} setProduct={setProduct} />
         <Profile />
       </div>
       <div className="header-title">sneakers</div>
