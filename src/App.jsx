@@ -7,6 +7,9 @@ function App() {
   const [count, setCount] = useState(0);
   const [selectedImg, setSelectedImg] = useState("/shoes1.png");
   const [product, setProduct] = useState({});
+  const [sliderOpen, setSliderOpen] = useState(false);
+  const [sliderIndex, setSliderIndex] = useState(0);
+
   function addToCard() {
     const productToBasket = {
       count: count,
@@ -15,13 +18,48 @@ function App() {
     };
     setProduct(productToBasket);
   }
+
+  function openSlider(index) {
+    setSliderIndex(index);
+    setSliderOpen(true);
+  }
+
+  function closeSlider() {
+    setSliderOpen(false);
+  }
+
+  function prevImg() {
+    setSliderIndex((prevIndex) => (prevIndex === 0 ? imgUrls.length - 1 : prevIndex - 1));
+  }
+
+  function nextImg() {
+    setSliderIndex((prevIndex) => (prevIndex === imgUrls.length - 1 ? 0 : prevIndex + 1));
+  }
+
   return (
     <>
       <HeadButtons product={product} />
       <div className="row-box">
-        <ImgContainer selectedImg={selectedImg} setSelectedImg={setSelectedImg} />
+        <ImgContainer selectedImg={selectedImg} setSelectedImg={setSelectedImg} openSlider={openSlider} />
         <RightContainer productCount={count} setCount={setCount} addToCard={addToCard} />
       </div>
+
+      {sliderOpen && (
+        <div className="overlay">
+          <div className="slider">
+            <button className="close-btn" onClick={closeSlider}>
+              <strong>X</strong>
+            </button>
+            <button className="prev-btn" onClick={prevImg}>
+              {"<"}
+            </button>
+            <img className="slider-img" src={imgUrls[sliderIndex]} alt="Slider" />
+            <button className="next-btn" onClick={nextImg}>
+              {">"}
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -122,12 +160,18 @@ function HeadButtons({ product }) {
   );
 }
 
-function ImgContainer({ selectedImg, setSelectedImg }) {
+function ImgContainer({ selectedImg, setSelectedImg, openSlider }) {
   return (
     <>
       <div className="product-container">
         <div>
-          <img className="selected-img" width={445} src={selectedImg} alt="" />
+          <img
+            className="selected-img"
+            width={445}
+            src={selectedImg}
+            alt=""
+            onClick={() => openSlider(imgUrls.indexOf(selectedImg))}
+          />
         </div>
         <div className="images-container">
           {imgUrls.map((img, index) => (
@@ -136,6 +180,7 @@ function ImgContainer({ selectedImg, setSelectedImg }) {
               key={index}
               src={img}
               onClick={() => setSelectedImg(img)}
+              onDoubleClick={() => openSlider(index)}
             ></img>
           ))}
         </div>
