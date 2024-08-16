@@ -1,16 +1,11 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const imgUrls = [
-  "src/assets/img/shoes1.png",
-  "src//assets/img/shoes2.png",
-  "src//assets/img/shoes3.png",
-  "src//assets/img/shoes4.png",
-];
+const imgUrls = ["/shoes1.png", "/shoes2.png", "/shoes3.png", "/shoes4.png"];
 
 function App() {
   const [count, setCount] = useState(0);
-  const [selectedImg, setSelectedImg] = useState("src/assets/img/shoes1.png");
+  const [selectedImg, setSelectedImg] = useState("/shoes1.png");
   const [product, setProduct] = useState({});
   function addToCard() {
     const productToBasket = {
@@ -71,7 +66,7 @@ function Basket({ product }) {
                     </p>
                   </div>
                   <button className="cop-btn" onClick={handleRemove}>
-                    <img src="src/assets/img/cop.svg" alt="" />
+                    <img src="/cop.svg" alt="" />
                   </button>
                 </div>
               ) : (
@@ -196,7 +191,7 @@ function CountButton({ count, setCount, addToCard }) {
       </div>
       <div>
         <button onClick={addToCard} className="shopping-button">
-          <img src="src/assets/img/Shape.svg" alt="shopping car" />
+          <img src="/Shape.svg" alt="shopping car" />
           <p>Add to cart</p>
         </button>
       </div>

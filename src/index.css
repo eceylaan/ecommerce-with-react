@@ -12,7 +12,7 @@ body {
 
 .basket {
   position: relative;
-  background-image: url(./assets/img/Group-14.svg);
+  background-image: url(/Group-14.svg);
   background-position: center;
   width: 30px;
   height: 30px;
@@ -23,7 +23,7 @@ body {
 }
 
 .profile {
-  background-image: url(./assets/img/Oval.svg);
+  background-image: url(/Oval.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
