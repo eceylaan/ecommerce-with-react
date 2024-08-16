@@ -58,6 +58,16 @@ function App() {
               {">"}
             </button>
           </div>
+          <div className="images-container">
+            {imgUrls.map((img, index) => (
+              <img
+                className={index === sliderIndex ? "active-img images" : "images"}
+                key={index}
+                src={img}
+                onClick={() => setSliderIndex(index)}
+              ></img>
+            ))}
+          </div>
         </div>
       )}
     </>
